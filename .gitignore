@@ -1,0 +1,5 @@
+**/target/
+.idea
+*.class
+*Test.java
+**/test/
