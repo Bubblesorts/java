@@ -18,6 +18,26 @@
     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-mail</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>cn.hutool</groupId>
+            <artifactId>hutool-all</artifactId>
+            <version>5.7.17</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-thymeleaf</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-websocket</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-redis</artifactId>
         </dependency>
         <dependency>
@@ -71,6 +91,11 @@
             <!--      optional 表示依赖是否向下传递 true表示不向下传递  默认值是false向下传递      -->
             <optional>true</optional>
         </dependency>
+        <dependency>
+            <groupId>com.cathive.fx</groupId>
+            <artifactId>com.cathive.fx.cdi</artifactId>
+            <version>1.0.0</version>
+        </dependency>
 
     </dependencies>
 
@@ -89,25 +114,25 @@
                 </configuration>
             </plugin>
         </plugins>
-            <resources>
-                <resource>
-                    <directory>src/main/java</directory>
-                    <includes>
-                        <include>**/*.properties</include>
-                        <include>**/*.xml</include>
-                    </includes>
-                    <filtering>false</filtering>
-                </resource>
-                <resource>
-                    <directory>src/main/resources</directory>
-                    <includes>
-                        <include>**/*.properties</include>
-                        <include>**/*.xml</include>
-                        <include>**/*.yml</include>
-                    </includes>
-                    <filtering>false</filtering>
-                </resource>
-            </resources>
+<!--            <resources>-->
+<!--                <resource>-->
+<!--                    <directory>src/main/java</directory>-->
+<!--                    <includes>-->
+<!--                        <include>**/*.properties</include>-->
+<!--                        <include>**/*.xml</include>-->
+<!--                    </includes>-->
+<!--                    <filtering>false</filtering>-->
+<!--                </resource>-->
+<!--                <resource>-->
+<!--                    <directory>src/main/resources</directory>-->
+<!--                    <includes>-->
+<!--                        <include>**/*.properties</include>-->
+<!--                        <include>**/*.xml</include>-->
+<!--                        <include>**/*.yml</include>-->
+<!--                    </includes>-->
+<!--                    <filtering>false</filtering>-->
+<!--                </resource>-->
+<!--            </resources>-->
 
     </build>
 

@@ -1,4 +1,4 @@
-package com.bluemsunblog.Util;
+package com.bluemsunblog.util;
 
 import com.bluemsunblog.entity.User;
 import io.jsonwebtoken.Jwt;
@@ -17,11 +17,11 @@ public class JWTUtil {
     public static String creatToken(User user){
         Map<String,Object> claims = new HashMap<>();
         claims.put("userId",user.getUserId());
-        claims.put("userName",user.getUserName());
+//        claims.put("userName",user.getUserName());
         claims.put("userStatus",user.getUserStatus());
-        claims.put("userEmail",user.getUserEmail());
-        claims.put("userPhone",user.getUserPhone());
-        claims.put("userProhibit",user.getUserProhibit());
+//        claims.put("userEmail",user.getUserEmail());
+//        claims.put("userPhone",user.getUserPhone());
+//        claims.put("userProhibit",user.getUserProhibit());
         JwtBuilder jwtBuilder = Jwts.builder()
                 .signWith(SignatureAlgorithm.HS256,jwtToken)
                 .setClaims(claims)

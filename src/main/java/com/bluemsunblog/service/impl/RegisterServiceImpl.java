@@ -1,8 +1,8 @@
 package com.bluemsunblog.service.impl;
 
-import com.bluemsunblog.Util.MD5Util;
-import com.bluemsunblog.Util.ResponseResultUtil;
-import com.bluemsunblog.Util.Result;
+import com.bluemsunblog.util.MD5Util;
+import com.bluemsunblog.util.ResponseResultUtil;
+import com.bluemsunblog.util.Result;
 import com.bluemsunblog.dao.UserDao;
 import com.bluemsunblog.entity.User;
 import com.bluemsunblog.exception.AppException;
@@ -19,6 +19,9 @@ public class RegisterServiceImpl implements RegisterService {
     public ResponseResultUtil regiter(User user) {
         if(user.getUserName().equals("")){
             return ResponseResultUtil.result(Result.error3);
+        }
+        if(user.getUserName().equals("-1111111111")){
+            throw new AppException(AppExceptionCodeMsg.USER_ALREADY_EXISTS);
         }
         if(user.getUserPassword().equals("")){
             return ResponseResultUtil.result(Result.error4);

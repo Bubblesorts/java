@@ -2,13 +2,17 @@ server:
   port: 8081
 
 spring:
+  mvc:
+    view:
+      suffix: .html
+    static-path-pattern: /static/**
   redis:
     host: localhost
     port: 6379
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/bluemsun_blog?useSSL=false&useUnicode=true&characterEncoding=utf8&serverTimezone=Asia/Shanghai
+    url: jdbc:mysql://39.101.77.55:3306/bluemsun_blog?useSSL=false&useUnicode=true&characterEncoding=utf8&serverTimezone=Asia/Shanghai
     username: root
     password: zhuxinyue
   server:
@@ -17,9 +21,28 @@ spring:
         enabled: true
         force: true
         charset: utf-8
+  mail:
+    username: 2130685958@qq.com
+    password: oyxfqytmryswebjj
+    host: smtp.qq.com
+    properties:
+      mail:
+        smtp:
+          ssl:
+            enable: true
+
 
 
 mybatis:
-  mapper-locations: classpath:com.bluemsunblog.dao/*.xml
+  mapper-locations: classpath:mapper/*.xml
   configuration:
     map-underscore-to-camel-case: true
+
+#file:
+#  upload:
+#    path: D:/java工作区/Bluemsunblog/src/main/resources/photo/
+#  show:
+#    path: /show/**
+
+
+

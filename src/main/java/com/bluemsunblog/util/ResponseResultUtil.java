@@ -1,4 +1,4 @@
-package com.bluemsunblog.Util;
+package com.bluemsunblog.util;
 
 public class ResponseResultUtil {
     private Object data;

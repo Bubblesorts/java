@@ -1,8 +1,6 @@
 package com.bluemsunblog.service.impl;
 
-import com.alibaba.druid.support.json.JSONUtils;
-import com.alibaba.fastjson2.JSON;
-import com.bluemsunblog.Util.*;
+import com.bluemsunblog.util.*;
 import com.bluemsunblog.dao.UserDao;
 import com.bluemsunblog.entity.User;
 import com.bluemsunblog.exception.AppException;
@@ -12,11 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 
-import javax.annotation.Resource;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
-
-import static org.apache.logging.log4j.message.MapMessage.MapFormat.JSON;
 
 @Service
 public class LoginServiceImpl implements LoginService {
@@ -55,7 +50,7 @@ public class LoginServiceImpl implements LoginService {
 
     @Override
     public User checkToken(String token) {
-        if (token.equals("")) {
+        if (token.equals("")||token.equals("null")) {
             return null;
         }
         Map<String, Object> map = JWTUtil.checkToken(token);

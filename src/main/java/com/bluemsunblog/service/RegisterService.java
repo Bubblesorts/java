@@ -1,6 +1,6 @@
 package com.bluemsunblog.service;
 
-import com.bluemsunblog.Util.ResponseResultUtil;
+import com.bluemsunblog.util.ResponseResultUtil;
 import com.bluemsunblog.entity.User;
 import org.springframework.transaction.annotation.Transactional;
 

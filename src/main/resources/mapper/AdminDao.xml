@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bluemsunblog.dao.AdminDao">
+
+    <update id="prohibit">
+        update blog_user set user_prohibit = #{userProhibit} where user_name=#{userName}
+    </update>
+    <update id="topBlogs">
+        update blog_blogs set blogs_top = 1 where blogs_id=#{blogsId}
+    </update>
+    <update id="topBlogs0">
+        update blog_blogs set blogs_top = 0 where blogs_id=#{blogsId}
+    </update>
+    <update id="examineBlogs">
+        update blog_examine set examine_status = #{examineStatus} where examine_id=#{examineId}
+    </update>
+<!--    <update id="examineUnsuccess">-->
+<!--        update blog_examine set examine_status = 2 where examine_id=#{examineId}-->
+<!--    </update>-->
+
+    <select id="checkdai" resultType="com.bluemsunblog.entity.Examine">
+        select examine_id,examine_blogsname,examine_username
+        from blog_examine
+        where examine_status=0
+    </select>
+    <select id="checkdaimsg" resultType="com.bluemsunblog.entity.Examine">
+        select *
+        from blog_examine
+        where examine_id=#{examineId}
+    </select>
+    <insert id="examinesuccess">
+        insert into blog_blogs(blogs_intro,blogs_kinds,blogs_name,blogs_top,blogs_username,blogs_click,blogs_like,blogs_collect,blogs_photo,blogs_file)
+        values (#{blogsIntro},#{blogsKinds},#{blogsName},#{blogsTop},#{blogsUsername},0,0,0,#{blogsPhoto},#{blogsFile})
+    </insert>
+    <insert id="addKinds">
+        insert into blog_kinds(blogs_kinds)
+        values (#{blogsKinds})
+    </insert>
+    <select id="checkTop" resultType="com.bluemsunblog.entity.Blogs">
+        select *
+        from blog_blogs
+        where blogs_top=1
+    </select>
+    <select id="allKinds" resultType="com.bluemsunblog.entity.Kinds">
+        select *
+        from blog_kinds
+    </select>
+</mapper>
+

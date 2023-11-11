@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bluemsunblog.dao.BlogsDao">
+
+
+    <select id="displayComment" resultType="com.bluemsunblog.entity.Comment">
+        select blog_comment.*,blog_user.user_photo
+        from blog_comment,blog_user
+        where  comment_blogsid = #{commentBlogsid} and comment_masteruser=#{commentMasteruser} and blog_comment.comment_username=blog_user.user_name
+    </select>
+    <select id="getblogsByid" resultType="com.bluemsunblog.entity.Blogs">
+        select blog_blogs.*,blog_user.user_photo
+        from blog_blogs,blog_user
+        where  blogs_id= #{blogsId} and blog_blogs.blogs_username=blog_user.user_name
+    </select>
+    <select id="getAllblogs1" resultType="com.bluemsunblog.entity.Blogs">
+        select *
+        from blog_blogs
+        where blogs_top=1
+        order by blogs_click desc
+    </select>
+    <select id="getAllblogs0" resultType="com.bluemsunblog.entity.Blogs">
+        select *
+        from blog_blogs
+        where blogs_top=0
+        order by blogs_click desc
+    </select>
+    <select id="hotPush" resultType="com.bluemsunblog.entity.Blogs">
+        select *
+        from blog_blogs
+        order by blogs_click desc
+    </select>
+    <update id="blogsPhoto">
+        update blog_blogs set blogs_photo=#{blogsPhoto}
+        where blogs_id=#{blogsId}
+    </update>
+    <update id="blogsFile">
+        update blog_blogs set blogs_file=#{blogsFile}
+        where blogs_id=#{blogsId}
+    </update>
+    <select id="getBlogslike1" resultType="com.bluemsunblog.entity.Blogs">
+        select *
+        from blog_blogs
+        <where>
+            1=1
+        <if test = "blogsName!=null">
+            and blogs_top=1 and  blogs_name like concat('%',#{blogsName},'%')
+        </if>
+        </where>
+        order by blogs_click desc
+    </select>
+    <select id="getBlogslike0" resultType="com.bluemsunblog.entity.Blogs">
+        select *
+        from blog_blogs
+        <where>
+            1=1
+            <if test = "blogsName!=null">
+                and blogs_top=0 and blogs_name like concat('%',#{blogsName},'%')
+            </if>
+        </where>
+        order by blogs_click desc
+    </select>
+    <select id="myBlogs" resultType="com.bluemsunblog.entity.Blogs">
+        select *
+        from blog_blogs
+        where  blogs_username= #{blogsUsername}
+    </select>
+    <select id="blogsKinds1" resultType="com.bluemsunblog.entity.Blogs">
+        select *
+        from blog_blogs
+        where  blogs_kinds= #{blogsKinds} and blogs_top=1
+        order by blogs_click desc
+    </select>
+    <select id="blogsKinds0" resultType="com.bluemsunblog.entity.Blogs">
+        select *
+        from blog_blogs
+        where  blogs_kinds= #{blogsKinds} and blogs_top=0
+        order by blogs_click desc
+    </select>
+    <select id="careBlogs" resultType="com.bluemsunblog.entity.Blogs">
+        select *
+        from blog_blogs
+        where  blogs_username=(select friend_fuser from blog_friend where friend_muser=#{friendMuser})
+    </select>
+    <select id="commentCount" resultType="java.lang.Integer">
+        select count(*)
+        from blog_comment
+        where comment_blogsid=#{commentBlogsid}
+    </select>
+    <select id="displayDrafts" resultType="com.bluemsunblog.entity.Drafts">
+        select *
+        from blog_drafts
+        where drafts_id=#{draftsId}
+    </select>
+    <select id="mydrafts" resultType="com.bluemsunblog.entity.Drafts">
+        select *
+        from blog_drafts
+        where drafts_username=#{draftsUsername}
+    </select>
+
+
+    <!--    <select id="getUserByusername" resultMap="UserResult">-->
+<!--        select *-->
+<!--        from blog_user-->
+<!--        where user_name=#{userName}-->
+<!--    </select>-->
+
+    <insert id="deliver">
+        insert into blog_examine(examine_blogsname,examine_username,examine_intro,examine_kinds,examine_status,examine_photo,examine_file,examine_time)
+        values(#{examineBlogsname},#{examineUsername},#{examineIntro},#{examineKinds},0,#{examinePhoto},#{examineFile},#{examineTime})
+    </insert>
+    <insert id="deliverComment">
+        insert into blog_comment(comment_username,comment_blogsid,comment_comment,comment_time,comment_masteruser,comment_reply)
+        values(#{commentUsername},#{commentBlogsid},#{commentComment},#{commentTime},#{commentMasteruser},#{commentReply})
+    </insert>
+    <insert id="insertDrafts">
+        insert into blog_drafts(drafts_blogsname,drafts_username,drafts_intro,drafts_kinds,drafts_photo,drafts_file,drafts_time)
+        values (#{draftsBlogsname},#{draftsUsername},#{draftsIntro},#{draftsKinds},#{draftsPhoto},#{draftsFile},#{draftsTime})
+    </insert>
+    <delete id="deleteBlogs">
+        delete from blog_blogs
+        where blogs_id = #{blogsId}
+    </delete>
+    <delete id="deleteDrafts">
+        delete from blog_drafts
+        where drafts_id=#{draftsId}
+    </delete>
+    <update id="hotBlogs">
+        update blog_blogs set blogs_click =#{blogsClick} where blogs_id=#{blogsId}
+    </update>
+    <update id="updateLike">
+        update blog_blogs set blogs_like =#{blogsLike} where blogs_id=#{blogsId}
+    </update>
+    <update id="updateCollect">
+        update blog_blogs set blogs_collect =#{blogsCollect} where blogs_id=#{blogsId}
+    </update>
+    <update id="updateDrafts">
+        update blog_drafts set drafts_blogsname=#{draftsBlogsname},drafts_username=#{draftsUsername},drafts_intro=#{draftsIntro},drafts_kinds=#{draftsKinds},drafts_photo=#{draftsPhoto},drafts_file=#{draftsFile},drafts_time=#{draftsTime}
+        where drafts_id=#{draftsId}
+    </update>
+</mapper>
+

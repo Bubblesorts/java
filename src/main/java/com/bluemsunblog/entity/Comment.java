@@ -19,4 +19,5 @@ public class Comment {
     private String commentTime;
     private String commentMasteruser;
     private String commentReply;
+    private String userPhoto;
 }
